@@ -32,6 +32,7 @@ namespace Landis.Library.BiomassHarvest
 
         private PartialCohortSelectors partialCohortSelectors;
         private CohortCounts cohortCounts;
+        private CohortCounts partialCohortCounts;
 
         //---------------------------------------------------------------------
 
@@ -44,6 +45,7 @@ namespace Landis.Library.BiomassHarvest
             : base(cohortSelector, extensionType)
         {
             this.partialCohortSelectors = new PartialCohortSelectors(partialCohortSelectors);
+            partialCohortCounts = new CohortCounts();
         }
 
         //---------------------------------------------------------------------
@@ -60,6 +62,9 @@ namespace Landis.Library.BiomassHarvest
             }
             if (reduction > 0)
                 cohortCounts.IncrementCount(cohort.Species);
+            if (reduction < cohort.Biomass)
+                partialCohortCounts.IncrementCount(cohort.Species);
+
             Record(reduction, cohort);
             return reduction;
         }
@@ -95,6 +100,11 @@ namespace Landis.Library.BiomassHarvest
                                 site.Location);
                 Debug.WriteSiteCohorts(log, site);
             }
+            if (partialCohortCounts.AllSpecies > 0)
+            {
+                SiteVars.CohortsPartiallyDamaged[site] = partialCohortCounts.AllSpecies;
+            }
+            partialCohortCounts.Reset();
         }
 
         //---------------------------------------------------------------------

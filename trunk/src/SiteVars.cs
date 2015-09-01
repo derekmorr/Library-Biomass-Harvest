@@ -14,10 +14,28 @@ namespace Landis.Library.BiomassHarvest
     /// </summary>
     public static class SiteVars
     {
+        private static ISiteVar<int> cohortsPartiallyDamaged;
+
+        //---------------------------------------------------------------------
         /// <summary>
         /// Site variable with biomass cohorts
         /// </summary>
         public static ISiteVar<ISiteCohorts> Cohorts { get; private set; }
+        //---------------------------------------------------------------------
+        /// <summary>
+        /// Site variable counting cohorts partially damaged (not removed)
+        /// </summary>
+        public static ISiteVar<int> CohortsPartiallyDamaged
+        {
+            get
+            {
+                return cohortsPartiallyDamaged;
+            }
+            set
+            {
+                cohortsPartiallyDamaged = value;
+            }
+        }
 
         //---------------------------------------------------------------------
 
