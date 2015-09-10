@@ -58,7 +58,8 @@
       <HintPath>C:\Program Files\LANDIS-II\v6\bin\extensions\Landis.Library.AgeOnlyCohorts.dll</HintPath>
     </Reference>
     <Reference Include="Landis.Library.BiomassCohorts">
-      <HintPath>C:\Program Files\LANDIS-II\v6\bin\extensions\Landis.Library.BiomassCohorts.dll</HintPath>
+      <HintPath>..\packages\Landis.Library.BiomassCohorts.1.3.0-rc2\lib\net35\Landis.Library.BiomassCohorts.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Landis.Library.Cohorts">
       <HintPath>C:\Program Files\LANDIS-II\v6\bin\extensions\Landis.Library.Cohorts.dll</HintPath>
