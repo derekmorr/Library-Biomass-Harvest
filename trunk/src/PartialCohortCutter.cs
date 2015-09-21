@@ -61,9 +61,11 @@ namespace Landis.Library.BiomassHarvest
                     reduction = (int)(percentage * cohort.Biomass);
             }
             if (reduction > 0)
+            {
                 cohortCounts.IncrementCount(cohort.Species);
-            if (reduction < cohort.Biomass)
-                partialCohortCounts.IncrementCount(cohort.Species);
+                if (reduction < cohort.Biomass)
+                    partialCohortCounts.IncrementCount(cohort.Species);
+            }
 
             Record(reduction, cohort);
             return reduction;
