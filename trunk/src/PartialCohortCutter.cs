@@ -1,9 +1,4 @@
-﻿// This file is part of the Biomass Harvest library for LANDIS-II.
-// For copyright and licensing information, see the NOTICE and LICENSE
-// files in this project's top-level directory, and at:
-//   http://landis-extensions.googlecode.com/svn/libs/biomass-harvest/trunk/
-
-using Edu.Wisc.Forest.Flel.Util;
+﻿using Edu.Wisc.Forest.Flel.Util;
 using Landis.Core;
 using Landis.Library.BiomassCohorts;
 using Landis.Library.SiteHarvest;
