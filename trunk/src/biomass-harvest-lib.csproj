@@ -57,9 +57,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\LANDIS-II\v6\bin\extensions\Landis.Library.AgeOnlyCohorts.dll</HintPath>
     </Reference>
-    <Reference Include="Landis.Library.BiomassCohorts">
-      <HintPath>..\packages\Landis.Library.BiomassCohorts.1.3.0-rc2\lib\net35\Landis.Library.BiomassCohorts.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Landis.Library.BiomassCohorts-v2">
+      <HintPath>..\..\..\Landis.Library.BiomassCohorts-v2.dll</HintPath>
     </Reference>
     <Reference Include="Landis.Library.Cohorts">
       <HintPath>C:\Program Files\LANDIS-II\v6\bin\extensions\Landis.Library.Cohorts.dll</HintPath>
@@ -82,11 +81,6 @@
   </ItemGroup>
   <ItemDefinitionGroup>
     <Reference>
-      <!-- Do not copy any of referenced assemblies to the output directory during a build.
-	       We only want the libraries that are fetched as NuGet packages to be copied to
-		   that directory.  In order to make it easier to stage them (without dealing without
-		   the version #s in their package paths -->
-      <Private>False</Private>
     </Reference>
   </ItemDefinitionGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
