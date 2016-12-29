@@ -101,9 +101,9 @@ namespace Landis.Library.BiomassHarvest
                 throw MakeInputValueException(valueAsStr.ToString(),
                                               exc.Message);
             }
-            if (percentage < 0.0 || percentage > 1.0)
+            if (percentage < 0.0 || percentage > 0.99)
                 throw MakeInputValueException(valueAsStr.ToString(),
-                                              string.Format("{0} is not between 0% and 100%", word));
+                                              string.Format("{0} is not between 0% and 99%.  100% is indicated by leaving out the %.", word));
 
             //  Read whitespace and ')'
             valueAsStr.Append(ReadWhitespace(reader));
