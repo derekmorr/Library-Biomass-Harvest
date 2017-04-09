@@ -73,6 +73,17 @@ namespace Landis.Library.BiomassHarvest
         {
             TextReader.SkipWhitespace(reader);
             index = reader.Index;
+            int nextChar = reader.Peek();
+
+            if (nextChar == -1)
+            {
+                throw new InputValueException();  // Missing value
+            }
+            if(nextChar != '(')
+            {
+                throw MakeInputValueException(TextReader.ReadWord(reader),
+                                                "Value does not start with \"(\"");
+            }
 
             StringBuilder valueAsStr = new StringBuilder();
             valueAsStr.Append((char) (reader.Read()));
@@ -96,7 +107,7 @@ namespace Landis.Library.BiomassHarvest
             }
             if (percentage.Value < 0.0 || percentage.Value > 0.99)
                 throw MakeInputValueException(valueAsStr.ToString(),
-                                              string.Format("{0} is not between 0% and 99%.  100% is indicated by leaving out the %.", word));
+                                              string.Format("{0} is not between 0% and 99%.  100% is indicated by omitting the parentheses and percentage.", word));
 
             //  Read whitespace and ')'
             valueAsStr.Append(ReadWhitespace(reader));
@@ -176,15 +187,6 @@ namespace Landis.Library.BiomassHarvest
                 int ignore;
                 InputValue<Percentage> percentage = ReadPercentage(reader, out ignore);
                 percentages[ageRange.Start] = percentage;
-            }
-            else if(reader.Peek() == -1)
-            {
-                throw new InputValueException();  // Missing value
-            }
-            else if(reader.Peek() != '(')
-            {
-                throw MakeInputValueException(TextReader.ReadWord(reader),
-                                              "Value does not start with \"(\"");
             }
 
             return new InputValue<AgeRange>(ageRange, word);
