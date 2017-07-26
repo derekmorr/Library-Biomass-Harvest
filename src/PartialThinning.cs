@@ -15,6 +15,7 @@ namespace Landis.Library.BiomassHarvest
         /// The partial cohort selectors that have been read for each species.
         /// </summary>
         public static PartialCohortSelectors CohortSelectors { get; private set; }
+        public static PartialCohortSelectors AdditionalCohortSelectors { get; private set; }
         private static IDictionary<ushort, Percentage> percentages;
 
         //---------------------------------------------------------------------
@@ -26,9 +27,9 @@ namespace Landis.Library.BiomassHarvest
             // handles percentages for partial thinning.
             AgeRangeParsing.InitializeClass();
             InputValues.Register<AgeRange>(PartialThinning.ReadAgeOrRange);
-
             percentages = new Dictionary<ushort, Percentage>();
             CohortSelectors = new PartialCohortSelectors();
+            AdditionalCohortSelectors = new PartialCohortSelectors();
         }
 
         //---------------------------------------------------------------------
@@ -213,6 +214,30 @@ namespace Landis.Library.BiomassHarvest
             else
             {
                 CohortSelectors[species] = new SpecificAgesCohortSelector(ages, ageRanges, percentages);
+                percentages.Clear();
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Creates and stores a specific-ages cohort selector for a species
+        /// if at least one percentage was found among the list of ages and
+        /// ranges that were read.
+        /// </summary>
+        /// <returns>
+        /// True if a selector was created and stored in the CohortSelectors
+        /// property.  False is returned if no selector was created because
+        /// there were no percentages read for any age or range.
+        /// </returns>
+        public static bool CreateAdditionalCohortSelectorFor(ISpecies species,
+                                                   IList<ushort> ages,
+                                                   IList<AgeRange> ageRanges)
+        {
+            if (percentages.Count == 0)
+                return false;
+            else
+            {
+                AdditionalCohortSelectors[species] = new SpecificAgesCohortSelector(ages, ageRanges, percentages);
                 percentages.Clear();
                 return true;
             }
